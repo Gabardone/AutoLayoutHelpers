@@ -1,4 +1,5 @@
 # AutoLayoutHelpers
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
 
 A small set of utilities to sand over the autolayout APIs most commonly encountered rough edges. There's several
 distinct but related sets of utilities within.
@@ -61,4 +62,4 @@ patterns and use the new ones you can add the following rules to your linter con
 
 ```
 
-As with anything other linter rules, they can be momentarily disabled where it makes sense to do so.
+As with any other linter rules, they can be momentarily disabled where it makes sense to do so.
