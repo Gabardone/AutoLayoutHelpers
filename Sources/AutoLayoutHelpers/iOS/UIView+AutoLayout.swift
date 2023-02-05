@@ -24,6 +24,7 @@ public extension UIView {
      - Note: For standardized AutoLayout usage it's best to declare a linter rule that triggers whenever `addSubview` is
      used. The few cases where fully manual layout is warranted can turn the rule off.
      */
+    @inlinable
     func insert(subview: UIView, at index: Int) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(subview, at: index)
@@ -46,6 +47,7 @@ public extension UIView {
      - Note: For standardized AutoLayout usage it's best to declare a linter rule that triggers whenever `insertSubview`
      is used. The few cases where fully manual layout is warranted can turn the rule off.
      */
+    @inlinable
     func insert(subview: UIView, aboveSubview siblingSubview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(subview, aboveSubview: siblingSubview)
@@ -68,6 +70,7 @@ public extension UIView {
      - Note: For standardized AutoLayout usage it's best to declare a linter rule that triggers whenever `insertSubview`
      is used. The few cases where fully manual layout is warranted can turn the rule off.
      */
+    @inlinable
     func insert(subview: UIView, belowSubview siblingSubview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(subview, belowSubview: siblingSubview)

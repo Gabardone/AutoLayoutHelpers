@@ -28,6 +28,7 @@ public extension NSView {
      - Note: For standardized AutoLayout usage it's best to declare a linter rule that triggers whenever `addSubview` is
      used. The few cases where fully manual layout is warranted can turn the rule off.
      */
+    @inlinable
     func add(subview: XXView, positioned place: NSWindow.OrderingMode, relativeTo otherView: XXView?) {
         subview.translatesAutoresizingMaskIntoConstraints = false // swiftlint:disable:this avoid_manually_disabling_TARMiC
         addSubview(subview, positioned: place, relativeTo: otherView) // swiftlint:disable:this avoid_addsubview
