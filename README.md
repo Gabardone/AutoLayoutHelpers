@@ -11,13 +11,13 @@ While mostly syntactic sugar, the `@inlinable` utilities offered here allow for 
 code to set up constraints.
 
 For example if you want to set up a height constraint at high priority instead of having to write the following:
-```
+```swift
 let heightConstraint = view.heightAnchor.constraint(equalToConstant: Self.height)
 heightConstraint.priority = .defaultHigh
 heightConstraint.isActive = true
 ```
 you can just do as follows (assuming we don't need the constraint afterwards) 
-```
+```swift
 view.heightAnchor.constraint(equalToConstant: Self.height).priority(.defaultHigh).activate()
 ```
 
@@ -32,7 +32,7 @@ needed. If you're looking for something here and don't see it chances are we det
 a fine enough job on its own.
 
 For example, if we want a view against its superview's safe area on both sides and top, Instead of writing:
-```
+```swift
 contentView.translatesAutoresizingMaskIntoConstraints = false
 view.addSubview(contentView)
 NSLayoutConstraint.activate([
@@ -43,7 +43,7 @@ NSLayoutConstraint.activate([
 ```
 
 we would write either the following:
-```
+```swift
 contentView.translatesAutoresizingMaskIntoConstraints = false
 view.addSubview(contentView)
 NSLayoutConstraint.activate(contentView.constraintsAgainstEnclosing(
@@ -53,7 +53,7 @@ NSLayoutConstraint.activate(contentView.constraintsAgainstEnclosing(
 ```
 
 or even better, taking advantage of the whole package:
-```
+```swift
 view.add(subview: contentView)
 contentView.constraintsAgainstEnclosing(
     layoutArea: view.safeAreaLayoutGuide,
@@ -73,7 +73,7 @@ is no removed from them is deactivated. This smoothes out constraint changes whe
  
 For example, say we have a `contentView` constrainted against `headerView` above, but we want it to hold its height
 while a dismissal animation happens. We could do that as follows:
-```
+```swift
 [...]
 @ActiveConstraint
 private var contentHeightHolder: NSLayoutConstraint?
@@ -108,7 +108,7 @@ It's safe to assume that manual layout is an exception in UI logic these days, b
 utilities available won't help if folks forget to use them. To encourage developers to avoid the old methods and use
 the new ones you can add the following rules to your linter config file:
 
-```
+```yaml
   avoid_manually_disabling_TARMiC:
     regex: 'translatesAutoresizingMaskIntoConstraints = false'
     message: "Do not manually turn translatesAutoresizingMaskIntoConstraints off, use the managed view hierarchy methods add(subview:) and insert(subview:) instead"
