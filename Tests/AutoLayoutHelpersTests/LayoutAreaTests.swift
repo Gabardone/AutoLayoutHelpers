@@ -39,6 +39,37 @@ final class LayoutAreaTests: XCTestCase {
         XCTAssertEqual(layoutGuide.frame.minX - view.bounds.minX, insets.leading)
     }
 
+    func testConstraintsAgainstEnclosingLayoutAreaVariadic() throws {
+        let outerSize = CGSize(width: 100.0, height: 100.0)
+        let view = XXView(frame: .init(origin: .zero, size: outerSize))
+        view.constraints(forFixedSize: outerSize).activate()
+
+        let layoutGuide = XXLayoutGuide()
+        view.addLayoutGuide(layoutGuide)
+
+        let layoutGuideHeight = 30.0
+        layoutGuide.heightAnchor.constraint(equalToConstant: layoutGuideHeight).activate()
+        let horizontalInset = 10.0
+        let bottomInset = 20.0
+        layoutGuide.constraintsAgainstEnclosing(
+            layoutArea: view,
+            (inset: horizontalInset, edges: .horizontal), (inset: bottomInset, edges: .bottom)
+        ).activate()
+        view.layoutIfNeeded()
+
+        XCTAssertEqual(layoutGuide.frame.height, layoutGuideHeight)
+        #if os(macOS)
+        // left-hand coordinate system.
+        XCTAssertEqual(layoutGuide.frame.minY - view.bounds.minY, bottomInset)
+        #elseif os(iOS)
+        // right-hand coordinate system.
+        XCTAssertEqual(view.bounds.maxY - layoutGuide.frame.maxY, bottomInset)
+        #endif
+        // We don't want to bother with RTL right now so offset is same on both sides.
+        XCTAssertEqual(view.bounds.maxX - layoutGuide.frame.maxX, horizontalInset)
+        XCTAssertEqual(layoutGuide.frame.minX - view.bounds.minX, horizontalInset)
+    }
+
     func testConstraintsCenteringInLayoutArea() throws {
         let outerSize = CGSize(width: 100.0, height: 100.0)
         let view = XXView(frame: .init(origin: .zero, size: outerSize))

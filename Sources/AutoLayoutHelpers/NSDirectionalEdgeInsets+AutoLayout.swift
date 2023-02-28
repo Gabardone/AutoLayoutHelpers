@@ -13,4 +13,8 @@ import UIKit
 
 public extension NSDirectionalEdgeInsets {
     static let zero = NSDirectionalEdgeInsets()
+
+    init(all: CGFloat) {
+        self.init(top: all, leading: all, bottom: all, trailing: all)
+    }
 }

@@ -70,6 +70,38 @@ public extension LayoutArea {
         return result
     }
 
+
+    /**
+     Returns constraints aligning the caller to another `LayoutArea`'s corresponding edges per the given list of
+     rectangle edge sets and their corresponding insets.
+
+     The method performs no validation on the incoming parameter list so if your rectangle edge sets overlap you will
+     get overlapping constraints in return.
+     - Precondition: Both the caller and `layoutArea` belong to the same layout hierarchy. There ought to be a semantic
+     enclosing relation between them, although this isn't enforced in any way.
+     - Parameter layoutArea: The enclosing layout area against whose edges the caller wants to constrain itself.
+     - Parameter edgeInsets: A list of pairs of rectangle edge sets and a corresponding inset. The same inset will
+     be applied to all the edges on the set.
+     - Returns: An array with the generated layout constraints. Don't forget to activate them or store somewhere for
+     later use.
+     */
+    func constraintsAgainstEnclosing(
+        layoutArea: LayoutArea,
+        _ edgeInsets: (inset: CGFloat, edges: NSDirectionalRectEdge)...
+    ) -> [NSLayoutConstraint] {
+        return constraintsAgainstEnclosing(layoutArea: layoutArea, edgeInsets: edgeInsets)
+    }
+
+    /// Implementation detail to work around Swift's variadic limitations.
+    internal func constraintsAgainstEnclosing(
+        layoutArea: LayoutArea,
+        edgeInsets: [(inset: CGFloat, edges: NSDirectionalRectEdge)]
+    ) -> [NSLayoutConstraint] {
+        return edgeInsets.flatMap { (inset: CGFloat, edges: NSDirectionalRectEdge) in
+            return constraintsAgainstEnclosing(layoutArea: layoutArea, edges: edges, insets: .init(all: inset))
+        }
+    }
+
     /**
      Returns constraints that center the caller against the center of the given `LayoutArea`.
 
