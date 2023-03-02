@@ -68,18 +68,18 @@ public extension XXView {
      The method will return an array of the constraints between the calling view and its superview edges with an
      inset equal to the given inset for each set of rect edges.
      - Precondition: The calling view must have a superview.
-     - Parameter edgeInsets: A list of pairings of rect edge sets with an inset value. The method does no validation
+     - Parameter insetEdges: A list of pairings of an inset value with a rect edge set. The method does no validation
      so if any of the rect edge sets overlap you'll get overlapping constraints as well.
      - Returns: An array with the generated constraints.
      */
-    func constraintsAgainstSuperviewEdges(
-        _ edgeInsets: (inset: CGFloat, edges: NSDirectionalRectEdge)...
+    func constraintsAgainstSuperviewInsetEdges(
+        _ insetEdges: (CGFloat, NSDirectionalRectEdge)...
     ) -> [NSLayoutConstraint] {
         guard let superview else {
             preconditionFailure("Attempted to create constraints against superview with no superview set.")
         }
 
-        return constraintsAgainstEnclosing(layoutArea: superview, edgeInsets: edgeInsets)
+        return constraintsAgainstEnclosing(layoutArea: superview, insetEdges: insetEdges)
     }
 
 

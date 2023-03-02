@@ -87,17 +87,17 @@ public extension LayoutArea {
      */
     func constraintsAgainstEnclosing(
         layoutArea: LayoutArea,
-        _ edgeInsets: (inset: CGFloat, edges: NSDirectionalRectEdge)...
+        insetEdges: (CGFloat, NSDirectionalRectEdge)...
     ) -> [NSLayoutConstraint] {
-        return constraintsAgainstEnclosing(layoutArea: layoutArea, edgeInsets: edgeInsets)
+        return constraintsAgainstEnclosing(layoutArea: layoutArea, insetEdges: insetEdges)
     }
 
     /// Implementation detail to work around Swift's variadic limitations.
     internal func constraintsAgainstEnclosing(
         layoutArea: LayoutArea,
-        edgeInsets: [(inset: CGFloat, edges: NSDirectionalRectEdge)]
+        insetEdges: [(inset: CGFloat, edges: NSDirectionalRectEdge)]
     ) -> [NSLayoutConstraint] {
-        return edgeInsets.flatMap { (inset: CGFloat, edges: NSDirectionalRectEdge) in
+        return insetEdges.flatMap { (inset: CGFloat, edges: NSDirectionalRectEdge) in
             return constraintsAgainstEnclosing(layoutArea: layoutArea, edges: edges, insets: .init(all: inset))
         }
     }

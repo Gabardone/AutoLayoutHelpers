@@ -53,7 +53,7 @@ final class LayoutAreaTests: XCTestCase {
         let bottomInset = 20.0
         layoutGuide.constraintsAgainstEnclosing(
             layoutArea: view,
-            (inset: horizontalInset, edges: .horizontal), (inset: bottomInset, edges: .bottom)
+            insetEdges: (horizontalInset, .horizontal), (bottomInset, .bottom)
         ).activate()
         view.layoutIfNeeded()
 
