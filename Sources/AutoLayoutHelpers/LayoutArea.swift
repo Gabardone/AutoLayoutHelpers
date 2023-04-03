@@ -70,6 +70,12 @@ public extension LayoutArea {
         return result
     }
 
+    /**
+     Disambiguation method for contraints against a layour area on all edges with no insets.
+     */
+    func constraintsAgainstEnclosing(layoutArea: LayoutArea) -> [NSLayoutConstraint] {
+        return constraintsAgainstEnclosing(layoutArea: layoutArea, edges: .all, insets: .zero)
+    }
 
     /**
      Returns constraints aligning the caller to another `LayoutArea`'s corresponding edges per the given list of
