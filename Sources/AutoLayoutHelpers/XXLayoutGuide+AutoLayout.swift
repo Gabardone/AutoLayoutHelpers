@@ -5,12 +5,7 @@
 //  Created by Óscar Morales Vivó on 8/20/22.
 //
 
-#if canImport(Cocoa)
-import Cocoa
-
-extension NSLayoutGuide: LayoutArea {}
-typealias XXLayoutGuide = NSLayoutGuide
-#elseif canImport(UIKit)
+#if canImport(UIKit)
 import UIKit
 
 extension UILayoutGuide: LayoutArea {}
@@ -23,4 +18,9 @@ extension UILayoutGuide {
         layoutFrame
     }
 }
+#elseif canImport(Cocoa)
+import Cocoa
+
+extension NSLayoutGuide: LayoutArea {}
+typealias XXLayoutGuide = NSLayoutGuide
 #endif
