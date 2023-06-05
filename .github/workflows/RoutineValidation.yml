@@ -8,11 +8,12 @@ on:
   
 env:
   toolpath: /Applications/Xcode_14.3.0.app/Contents/Developer
+  runner: macos-13
 
 jobs:
   format-validation:
     name: Format
-    runs-on: macos-13
+    runs-on: $runner
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -22,7 +23,7 @@ jobs:
         run: swiftformat Sources Tests --lint --dryrun
   linter-validation:
     name: Linter
-    runs-on: macos-13
+    runs-on: $runner
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -41,7 +42,7 @@ jobs:
         ]
       fail-fast: false
     name: Build and Test ${{ matrix.platforms.name }}
-    runs-on: macos-13
+    runs-on: $runner
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
