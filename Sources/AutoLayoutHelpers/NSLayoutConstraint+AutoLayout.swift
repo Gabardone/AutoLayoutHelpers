@@ -5,14 +5,14 @@
 //  Created by Óscar Morales Vivó on 8/20/22.
 //
 
-#if canImport(Cocoa)
-import Cocoa
-
-public typealias XXLayoutPriority = NSLayoutConstraint.Priority
-#elseif canImport(UIKit)
+#if canImport(UIKit)
 import UIKit
 
 public typealias XXLayoutPriority = UILayoutPriority
+#elseif canImport(Cocoa)
+import Cocoa
+
+public typealias XXLayoutPriority = NSLayoutConstraint.Priority
 #endif
 
 public extension NSLayoutConstraint {

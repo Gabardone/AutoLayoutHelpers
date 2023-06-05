@@ -5,10 +5,10 @@
 //  Created by Óscar Morales Vivó on 8/20/22.
 //
 
-#if canImport(Cocoa)
-import Cocoa
-#elseif canImport(UIKit)
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(Cocoa)
+import Cocoa
 #endif
 
 public extension Sequence where Element == NSLayoutConstraint {
