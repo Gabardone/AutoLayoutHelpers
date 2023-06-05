@@ -27,7 +27,7 @@ public extension UIView {
     @inlinable
     func insert(subview: UIView, at index: Int) {
         subview.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(subview, at: index)
+        insertSubview(subview, at: index) // swiftlint:disable:this avoid_insertsubview
     }
 
     /**
@@ -50,7 +50,7 @@ public extension UIView {
     @inlinable
     func insert(subview: UIView, aboveSubview siblingSubview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(subview, aboveSubview: siblingSubview)
+        insertSubview(subview, aboveSubview: siblingSubview) // swiftlint:disable:this avoid_insertsubview
     }
 
     /**
@@ -73,7 +73,7 @@ public extension UIView {
     @inlinable
     func insert(subview: UIView, belowSubview siblingSubview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(subview, belowSubview: siblingSubview)
+        insertSubview(subview, belowSubview: siblingSubview) // swiftlint:disable:this avoid_insertsubview
     }
 }
 

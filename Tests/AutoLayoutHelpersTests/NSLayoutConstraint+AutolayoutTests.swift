@@ -14,7 +14,8 @@ final class NSLayoutConstraintAutoLayoutTests: XCTestCase {
         let view = XXView()
         let almostRequired: XXLayoutPriority = .required - 1.0
 
-        let constraint = view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.0).priority(almostRequired)
+        let constraint = view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.0)
+            .priority(almostRequired)
 
         XCTAssertEqual(constraint.priority, almostRequired)
     }
