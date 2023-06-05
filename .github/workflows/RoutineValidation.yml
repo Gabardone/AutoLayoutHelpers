@@ -37,10 +37,10 @@ jobs:
     strategy:
       matrix:
         platforms: [
-          'platform=macOS',
-          'platform=macOS,variant=Mac Catalyst',
-          'platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro',
-          'platform=tvOS Simulator,OS=16.4,name=Apple TV 4K'
+          macOS,
+          iOS,
+          catalyst,
+          tvOS
         ]
       fail-fast: false
     name: Build and Test ${{ matrix.platforms }}
@@ -51,4 +51,4 @@ jobs:
       - name: Select Xcode Version
         run: sudo xcode-select --switch /Applications/Xcode_14.3.0.app/Contents/Developer
       - name: Build and Test
-        run: xcodebuild test -scheme ${{ github.event.repository.name }} -destination '${{ matrix.platforms }}'
+        run: xcodebuild test -scheme ${{ github.event.repository.name }} -destination '$${{ matrix.platforms }}'
