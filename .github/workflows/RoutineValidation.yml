@@ -5,6 +5,9 @@ on:
     branches:
     - main
   pull_request:
+  
+env:
+  toolpath: /Applications/Xcode_14.3.0.app/Contents/Developer
 
 jobs:
   format-validation:
@@ -14,7 +17,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch /Applications/Xcode_14.3.0.app/Contents/Developer
+        run: sudo xcode-select --switch ${{ env.toolpath }}
       - name: Verify Format
         run: swiftformat Sources Tests --lint --dryrun
   linter-validation:
@@ -24,7 +27,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch /Applications/Xcode_14.3.0.app/Contents/Developer
+        run: sudo xcode-select --switch ${{ env.toolpath }}
       - name: Run Linter
         run: swiftlint Sources Tests --quiet 
   build-and-test-package:
@@ -43,6 +46,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch /Applications/Xcode_14.3.0.app/Contents/Developer
+        run: sudo xcode-select --switch ${{ env.toolpath }}
       - name: Build and Test
         run: xcodebuild test -scheme ${{ github.event.repository.name }} -destination '${{ matrix.platforms.destination }}'
