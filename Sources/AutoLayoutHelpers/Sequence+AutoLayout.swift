@@ -11,7 +11,7 @@ import UIKit
 import Cocoa
 #endif
 
-public extension Sequence where Element == NSLayoutConstraint {
+public extension Sequence<NSLayoutConstraint> {
     /**
      Use this method for a more terse activation of a non-array sequence of layout constraints.
      */
