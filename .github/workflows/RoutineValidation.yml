@@ -8,12 +8,11 @@ on:
   
 env:
   toolpath: /Applications/Xcode_14.3.0.app/Contents/Developer
-  runner: macos-13
 
 jobs:
   format-validation:
     name: Format
-    runs-on: $runner
+    runs-on: ${{ vars.RUNNER }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -23,7 +22,7 @@ jobs:
         run: swiftformat Sources Tests --lint --dryrun
   linter-validation:
     name: Linter
-    runs-on: $runner
+    runs-on: ${{ vars.RUNNER }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -42,14 +41,14 @@ jobs:
         ]
       fail-fast: false
     name: Build ${{ matrix.platforms.name }}
-    runs-on: $runner
+    runs-on: ${{ vars.RUNNER }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
         run: sudo xcode-select --switch ${{ env.toolpath }}
       - name: Build and Test
-        run: xcodebuild build -configuration release -scheme ${{ github.event.repository.name }} -destination '${{ matrix.platforms.destination }}'
+        run: xcodebuild build -configuration release -target ${{ github.event.repository.name }} -destination '${{ matrix.platforms.destination }}'
   test-package:
     strategy:
       matrix:
@@ -61,7 +60,7 @@ jobs:
         ]
       fail-fast: false
     name: Test ${{ matrix.platforms.name }}
-    runs-on: $runner
+    runs-on: ${{ vars.RUNNER }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
