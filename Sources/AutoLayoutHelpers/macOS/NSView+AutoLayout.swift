@@ -30,7 +30,7 @@ public extension NSView {
      */
     @inlinable
     func add(subview: XXView, positioned place: NSWindow.OrderingMode, relativeTo otherView: XXView?) {
-        subview.translatesAutoresizingMaskIntoConstraints = false // swiftlint:disable:this avoid_manually_disabling_TARMiC
+        subview.translatesAutoresizingMaskIntoConstraints = false // swiftlint:disable:this avoid_manually_disabling_TARMiC line_length
         addSubview(subview, positioned: place, relativeTo: otherView) // swiftlint:disable:this avoid_addsubview
     }
 

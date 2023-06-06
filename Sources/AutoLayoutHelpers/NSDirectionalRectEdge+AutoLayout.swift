@@ -1,6 +1,6 @@
 //
 //  NSDirectionalRectEdge+AutoLayout.swift
-//  
+//
 //
 //  Created by Óscar Morales Vivó on 2/27/23.
 //

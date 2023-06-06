@@ -74,7 +74,7 @@ public extension LayoutArea {
      Disambiguation method for contraints against a layour area on all edges with no insets.
      */
     func constraintsAgainstEnclosing(layoutArea: LayoutArea) -> [NSLayoutConstraint] {
-        return constraintsAgainstEnclosing(layoutArea: layoutArea, edges: .all, insets: .zero)
+        constraintsAgainstEnclosing(layoutArea: layoutArea, edges: .all, insets: .zero)
     }
 
     /**
@@ -95,7 +95,7 @@ public extension LayoutArea {
         layoutArea: LayoutArea,
         insetEdges: (CGFloat, NSDirectionalRectEdge)...
     ) -> [NSLayoutConstraint] {
-        return constraintsAgainstEnclosing(layoutArea: layoutArea, insetEdges: insetEdges)
+        constraintsAgainstEnclosing(layoutArea: layoutArea, insetEdges: insetEdges)
     }
 
     /// Implementation detail to work around Swift's variadic limitations.
@@ -103,8 +103,8 @@ public extension LayoutArea {
         layoutArea: LayoutArea,
         insetEdges: [(inset: CGFloat, edges: NSDirectionalRectEdge)]
     ) -> [NSLayoutConstraint] {
-        return insetEdges.flatMap { (inset: CGFloat, edges: NSDirectionalRectEdge) in
-            return constraintsAgainstEnclosing(layoutArea: layoutArea, edges: edges, insets: .init(all: inset))
+        insetEdges.flatMap { (inset: CGFloat, edges: NSDirectionalRectEdge) in
+            constraintsAgainstEnclosing(layoutArea: layoutArea, edges: edges, insets: .init(all: inset))
         }
     }
 

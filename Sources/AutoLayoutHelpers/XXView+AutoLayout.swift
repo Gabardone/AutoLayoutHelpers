@@ -26,7 +26,7 @@ public extension XXView {
      used. The few cases where fully manual layout is warranted can turn the rule off.
      */
     func add(subview: XXView) {
-        subview.translatesAutoresizingMaskIntoConstraints = false // swiftlint:disable:this avoid_manually_disabling_TARMiC
+        subview.translatesAutoresizingMaskIntoConstraints = false // swiftlint:disable:this avoid_manually_disabling_TARMiC line_length
         addSubview(subview) // swiftlint:disable:this avoid_addsubview
     }
 }
@@ -81,7 +81,6 @@ public extension XXView {
 
         return constraintsAgainstEnclosing(layoutArea: superview, insetEdges: insetEdges)
     }
-
 
     /**
      Constraint generator to center a view within its superview.
