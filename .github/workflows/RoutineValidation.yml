@@ -6,9 +6,6 @@ on:
     - main
   pull_request:
   
-env:
-  toolpath: /Applications/Xcode_14.3.0.app/Contents/Developer
-
 jobs:
   format-validation:
     name: Format
@@ -17,7 +14,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch ${{ env.toolpath }}
+        run: sudo xcode-select --switch ${{ vars.TOOLPATH }}
       - name: Verify Format
         run: swiftformat Sources Tests --lint --dryrun
   linter-validation:
@@ -27,10 +24,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch ${{ env.toolpath }}
+        run: sudo xcode-select --switch ${{ vars.TOOLPATH }}
       - name: Run Linter
         run: swiftlint Sources Tests --quiet 
-  build-package:
+  build-and-test-package:
     strategy:
       matrix:
         platforms: [
@@ -40,31 +37,12 @@ jobs:
           {name: 'tvOS', destination: 'platform=tvOS Simulator,OS=16.4,name=Apple TV 4K'}
         ]
       fail-fast: false
-    name: Build ${{ matrix.platforms.name }}
+    name: Build and Test ${{ matrix.platforms.name }}
     runs-on: ${{ vars.RUNNER }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Select Xcode Version
-        run: sudo xcode-select --switch ${{ env.toolpath }}
-      - name: Build and Test
-        run: xcodebuild build -configuration release -target ${{ github.event.repository.name }} -destination '${{ matrix.platforms.destination }}'
-  test-package:
-    strategy:
-      matrix:
-        platforms: [
-          {name: 'macOS', destination: 'platform=macOS'},
-          {name: 'Catalyst', destination: 'platform=macOS,variant=Mac Catalyst'},
-          {name: 'iOS', destination: 'platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro'},
-          {name: 'tvOS', destination: 'platform=tvOS Simulator,OS=16.4,name=Apple TV 4K'}
-        ]
-      fail-fast: false
-    name: Test ${{ matrix.platforms.name }}
-    runs-on: ${{ vars.RUNNER }}
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Select Xcode Version
-        run: sudo xcode-select --switch ${{ env.toolpath }}
+        run: sudo xcode-select --switch ${{ vars.TOOLPATH }}
       - name: Build and Test
         run: xcodebuild test -scheme ${{ github.event.repository.name }} -destination '${{ matrix.platforms.destination }}'
