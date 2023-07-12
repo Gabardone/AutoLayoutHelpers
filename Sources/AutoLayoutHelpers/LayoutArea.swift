@@ -20,7 +20,7 @@ import Cocoa
  where you actually need to explicitly layout on left/right instead of leading/trailing just use the raw auto layout
  API.
  */
-public protocol LayoutArea {
+public protocol LayoutArea: AnyObject {
     var bottomAnchor: NSLayoutYAxisAnchor { get }
     var centerXAnchor: NSLayoutXAxisAnchor { get }
     var centerYAnchor: NSLayoutYAxisAnchor { get }
@@ -40,9 +40,10 @@ public extension LayoutArea {
      `NSView.constraintsAgainstSuperview(_:insets:)`
      - Precondition: Both the caller and `layoutArea` belong to the same layout hierarchy. There ought to be a semantic
      enclosing relation between them, although this isn't enforced in any way.
-     - Parameter layoutArea: The enclosing layout area against whose edges the caller wants to constrain itself.
-     - Parameter edges: The edges to constrain against. By default, all of them.
-     - Parameter insets: Insets to apply between the caller and the enclosing layout area. Assuming an enclosing
+     - Parameters:
+       - layoutArea: The enclosing layout area against whose edges the caller wants to constrain itself.
+       - edges: The edges to constrain against. By default, all of them.
+       - insets: Insets to apply between the caller and the enclosing layout area. Assuming an enclosing
      relationship, positive values make the caller smaller while negative values make the caller larger than the
      enclosing layout area.
      - Returns: An array with the generated layout constraints. Don't forget to activate them or store somewhere for
@@ -85,8 +86,9 @@ public extension LayoutArea {
      get overlapping constraints in return.
      - Precondition: Both the caller and `layoutArea` belong to the same layout hierarchy. There ought to be a semantic
      enclosing relation between them, although this isn't enforced in any way.
-     - Parameter layoutArea: The enclosing layout area against whose edges the caller wants to constrain itself.
-     - Parameter edgeInsets: A list of pairs of rectangle edge sets and a corresponding inset. The same inset will
+     - Parameters:
+       - layoutArea: The enclosing layout area against whose edges the caller wants to constrain itself.
+       - edgeInsets: A list of pairs of rectangle edge sets and a corresponding inset. The same inset will
      be applied to all the edges on the set.
      - Returns: An array with the generated layout constraints. Don't forget to activate them or store somewhere for
      later use.
@@ -114,9 +116,10 @@ public extension LayoutArea {
      For the common use case of a view being centered against its superview use `NSView.constraintsCenteringInSuperview`
      instead.
      - Precondition: Both the caller and `layoutArea` belong to the same layout hierarchy.
-     - Parameter layoutArea: The layout area we want to center on.
-     - Parameter horizontalOffset: An additional horizontal offset to apply. Defaults to 0.0 (fully centered)
-     - Parameter verticalOffset: An additional vertical offset to apply. Defaults to 0.0 (fully centered)
+     - Parameters:
+       - layoutArea: The layout area we want to center on.
+       - horizontalOffset: An additional horizontal offset to apply. Defaults to 0.0 (fully centered)
+       - verticalOffset: An additional vertical offset to apply. Defaults to 0.0 (fully centered)
      - Returns: An array with the constraints that center the caller against `layoutArea` with the given
      offsets applied.
      */
