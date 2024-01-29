@@ -1,5 +1,7 @@
 # AutoLayoutHelpers
-[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
+[![MIT License](https://badgen.net/github/license/micromatch/micromatch)](https://mit-license.org/) 
+[![Swift Package Manager compatible](https://badgen.net/badge/SPM/Compatible?color=green)](https://github.com/apple/swift-package-manager)
+[![Platforms](https://badgen.net/badge/icon/iOS%20%7C%20macOS%20%7C%20macOS%20Catalyst%20%7C%20tvOS%20%7C%20visionOS?icon=apple&label&color=grey)](https://apple.com/developer)
 
 A small set of utilities to sand over the autolayout APIs most commonly encountered rough edges. There's several
 distinct but related sets of utilities within.
